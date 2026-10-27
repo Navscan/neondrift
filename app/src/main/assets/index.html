@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Neon Drift</title>
+  <style>
+    body { background: #0f0f13; color: white; font-family: system-ui; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; touch-action: none; }
+    h1 { color: #d8b4fe; text-shadow: 0 0 20px #d8b4fe; }
+    .game-area { width: 100vw; height: 70vh; max-width: 400px; background: #000; border-top: 2px solid #7c7cff; border-bottom: 2px solid #7c7cff; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(124, 124, 255, 0.3); }
+    .car { width: 40px; height: 80px; background: #ff4545; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); border-radius: 10px; box-shadow: 0 0 15px #ff4545; transition: left 0.1s; }
+    .instructions { margin-top: 20px; color: #888; }
+  </style>
+</head>
+<body>
+  <h1>NEON DRIFT</h1>
+  <div class="game-area" id="game">
+    <div class="car" id="car"></div>
+  </div>
+  <div class="instructions">Tap left/right to steer</div>
+
+  <script>
+    const car = document.getElementById('car');
+    const game = document.getElementById('game');
+    let position = 50; // percentage
+
+    game.addEventListener('touchstart', (e) => {
+      const touchX = e.touches[0].clientX;
+      if (touchX < window.innerWidth / 2) {
+        position = Math.max(0, position - 15);
+      } else {
+        position = Math.min(85, position + 15);
+      }
+      car.style.left = position + '%';
+    });
+  </script>
+</body>
+</html>

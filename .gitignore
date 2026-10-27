@@ -1,0 +1,12 @@
+# Ignore the keystore (handled via GitHub Secrets)
+*.jks
+neondrift-release.jks
+
+# Ignore build outputs and gradle caches
+.gradle/
+build/
+app/build/
+local.properties
+
+# OS files
+.DS_Store
