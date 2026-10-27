@@ -22,8 +22,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Gradle
+      - name: Setup Gradle (Pinned to 8.5)
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.5'   # <--- THIS IS THE FIX
 
       - name: Build Release APK
         env:
