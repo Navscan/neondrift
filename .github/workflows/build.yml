@@ -29,12 +29,19 @@ jobs:
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
-          echo "$KEYSTORE_BASE64" | base64 --decode > neondrift-release.jks
+          # The 'tr -d [:space:]' strips any hidden line breaks or spaces from the secret
+          echo "$KEYSTORE_BASE64" | tr -d '[:space:]' | base64 --decode > neondrift-release.jks
 
       - name: Build Release APK
         env:
           KEYSTORE_PASSWORD: "password123"
         run: gradle assembleRelease
+
+      - name: Create GitHub Release
+        uses: actions/upload-artifact@v4
+        with:
+          name: NeonDrift-APK
+          path: app/build/outputs/apk/release/app-release.apk
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
